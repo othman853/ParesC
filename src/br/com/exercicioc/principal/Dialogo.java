@@ -29,10 +29,37 @@ public class Dialogo {
 	public int lerCodigo(){
 		int codigo = 0;		
 		
+		System.out.println("Código ---- Item");
+		System.out.println("1 --------- Livro");
+		System.out.println("2 --------- Mídia");
+		System.out.println("3 --------- Revista");
+		
 		System.out.print("Código: ");
 		codigo = leitor.nextInt();
 		
 		return codigo;
+	}
+	
+	public String lerTitulo(){
+		String titulo = "";
+		System.out.print("Título: ");
+		titulo = leitor.next();
+		return titulo;		
+	}
+	
+	public String lerDescricao(){
+		System.out.print("Descrição: ");
+		return leitor.nextLine();
+	}
+	
+	public int lerQuantidade(){
+		System.out.print("Quantidade: ");
+		return leitor.nextInt();
+	}
+	
+	public double lerPreco(){
+		System.out.print("Preço: ");
+		return leitor.nextDouble();
 	}
 	
 	public String lerAutor(){
@@ -43,6 +70,10 @@ public class Dialogo {
 		autor = leitor.nextLine();
 		
 		return autor;
+	}
+
+	public void codigoInvalido() {
+		System.out.println("Código Inválido.");		
 	}
 	
 }

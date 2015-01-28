@@ -12,29 +12,18 @@ public class Principal {
 		int codigo = 1;
 		ArrayList<Item> itens = new ArrayList<Item>();
 		Item item;
+		boolean continuar = true;
 		
 		System.out.println("Digite a mensagem de boas vindas: ");
 		String mensagem = entrada.nextLine();
 		
 		Dialogo dialogo = new Dialogo(entrada, mensagem);
-
+		
 		dialogo.boasVindas();
-		System.out.println("Código ---- Item");
-		System.out.println("1 --------- Livro");
-		System.out.println("2 --------- Mídia");
-		System.out.println("3 --------- Revista");
-		System.out.println("0 --------- Sair");
+				
 
-		while (codigo != 0) {
-
-			System.out.println("Cadastre o item...");
-
-			System.out.print("Digite o código do item ou 0 para sair: ");
-			try {
-				codigo = entrada.nextInt();
-			} catch (Exception ex) {
-				System.out.println("Código inválido.");
-			}
+		while (continuar) {
+			codigo = dialogo.lerCodigo();
 
 			switch (codigo) {
 			case 1:
@@ -48,42 +37,26 @@ public class Principal {
 				break;
 			case 4:
 				item = new Revista();
-				break;
-				
+				break;				
 				
 			default:
+				dialogo.codigoInvalido();
 				continue;
 			}
 			
-			entrada.nextLine();
-			System.out.print("Título: ");
-			item.setTitulo(entrada.nextLine());
-
-			System.out.print("Autor: ");
-
-			item.setAutor(entrada.nextLine());
-
-			System.out.print("Descrição: ");
-
-			item.setDescricao(entrada.nextLine());
-
-			System.out.print("Quantidade: ");
-			try {
-				item.setQuantidade(entrada.nextInt());
-			} catch (Exception ex) {
-				System.out.println("Quantidade inválida.");
-			}
-
-			System.out.println("Preço: ");
-			try {
-				item.setPreco(entrada.nextDouble());
-			} catch (Exception ex) {
-				System.out.println("Preço inválido.");
-			}
+			item.setTitulo(dialogo.lerTitulo());
+			item.setAutor(dialogo.lerAutor());
+			item.setDescricao(dialogo.lerDescricao());
+			item.setQuantidade(dialogo.lerQuantidade());
+			item.setPreco(dialogo.lerPreco());			
 									
 			itens.add(item);
-		}
+			
+			continuar = dialogo.continuar();
+		}		
 		
+		System.out.println();
+		System.out.println("--------------------- ITENS -----------------------------");
 		
 		for(Item i: itens){
 			
@@ -93,6 +66,7 @@ public class Principal {
 			System.out.println("Quantidade: " + i.getQuantidade());
 			System.out.println("Preço: " + i.getPreco());
 			System.out.println("Preço com Desconto: " + i.getPrecoComDesconto());
+			System.out.println("--------------------------------------------------");
 		}
 	}
 
